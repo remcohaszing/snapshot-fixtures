@@ -1,0 +1,1 @@
+This file exists to test that plain files are skipped.
