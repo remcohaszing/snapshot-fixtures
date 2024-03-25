@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict'
+import { randomUUID } from 'node:crypto'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import test, { describe } from 'node:test'
+import { describe, test } from 'node:test'
 import { pathToFileURL } from 'node:url'
 
 import { testFixturesDirectory } from 'snapshot-fixtures'
@@ -48,7 +49,7 @@ describe('testFixturesDirectory', () => {
   })
 
   test('throws assertion error if actual doesn’t match expected', async () => {
-    const dir = join(tmpdir(), crypto.randomUUID())
+    const dir = join(tmpdir(), randomUUID())
     let file: VFile | undefined
     await mkdir(dir, { recursive: true })
     await writeFile(join(dir, 'input'), 'in\n')
@@ -69,7 +70,7 @@ describe('testFixturesDirectory', () => {
   })
 
   test('throws if input file doesn’t exist', async () => {
-    const dir = join(tmpdir(), crypto.randomUUID())
+    const dir = join(tmpdir(), randomUUID())
     await mkdir(dir, { recursive: true })
     await writeFile(join(dir, 'expected'), 'old\n')
 
