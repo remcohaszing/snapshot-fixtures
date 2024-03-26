@@ -139,6 +139,20 @@ async function getOptions(directory: URL): Promise<unknown> {
 }
 
 /**
+ * Write content to a file.
+ *
+ * @param url
+ *   The file URL to write to.
+ * @param content
+ *   The content to write to the file.
+ */
+async function outputFile(url: URL, content: string): Promise<undefined> {
+  // eslint-disable-next-line no-console
+  console.log('Writing', makePrettyPath(url))
+  await writeFile(url, content)
+}
+
+/**
  * Create a test for a single test fixture directory.
  *
  * @internal
@@ -161,8 +175,8 @@ export function createTest<T>(
   write: boolean | undefined,
   format: boolean | undefined,
   spec: Test<T>
-): () => Promise<void> {
-  return async function run(): Promise<void> {
+): () => Promise<undefined> {
+  return async function run(): Promise<undefined> {
     let generate: Generate<T>
     let inputUrl: URL
     let expectedUrl: URL
@@ -210,7 +224,7 @@ export function createTest<T>(
     // This is only covered in CI.
     /* c8 ignore start */
     if (expected == null) {
-      return writeFile(expectedUrl, actual)
+      return outputFile(expectedUrl, actual)
     }
 
     /* c8 ignore stop */
@@ -221,9 +235,7 @@ export function createTest<T>(
       // This is only covered outside of CI.
       /* c8 ignore start */
       if (write && error instanceof AssertionError) {
-        // eslint-disable-next-line no-console
-        console.log('Writing', makePrettyPath(expectedUrl))
-        await writeFile(expectedUrl, actual)
+        await outputFile(expectedUrl, actual)
       }
 
       /* c8 ignore stop */
