@@ -39,18 +39,18 @@ Let’s say you have the following project structure:
 
 ```
 my-project/
-├── fixtures
-│   ├── fixture-1
+├── fixtures/
+│   ├── fixture-1/
 │   │   ├── input.txt
 │   │   ├── expected-1.txt
 │   │   ├── expected-2.txt
 │   │   └── options.json
-│   └── fixture-2
+│   └── fixture-2/
 │       ├── input.txt
 │       ├── expected-1.txt
 │       ├── expected-2.txt
 │       └── options.js
-└── test
+└── test/
     └── fixtures.test.js
 ```
 
