@@ -24,7 +24,10 @@ import { makePrettyPath } from './path-utils.js'
  * @returns
  *   The string that should match the expected output.
  */
-type Generate<Options> = (file: VFile, options: Options) => PromiseLike<string> | string
+type Generate<Options> = (
+  file: VFile,
+  options: Options
+) => Buffer | PromiseLike<Buffer | VFile | string> | VFile | string
 
 interface FixtureTest<Options> {
   /**
@@ -190,7 +193,7 @@ export function createTest<T>(
 
     /* c8 ignore stop */
 
-    let actual = await generate(file, fixtureOptions as T)
+    let actual = String(await generate(file, fixtureOptions as T))
     if (format) {
       const prettier = await import('prettier')
       const fileInfo = await prettier.getFileInfo(expectedUrl, { resolveConfig: true })

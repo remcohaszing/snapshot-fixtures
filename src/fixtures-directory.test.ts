@@ -24,6 +24,10 @@ describe('testFixturesDirectory', () => {
 
         'test-function.txt': String,
 
+        'vfile.txt': (file) => file,
+
+        'buffer.txt': (file) => Buffer.from(String(file)),
+
         'test-object.txt': {
           generate: String
         },
