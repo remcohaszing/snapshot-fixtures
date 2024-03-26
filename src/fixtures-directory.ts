@@ -246,6 +246,7 @@ export function createTest<T>(
 export function testFixturesDirectory<Options>(
   options: TestFixturesDirectoryOptions<Options>
 ): undefined {
+  const tests = Object.entries(options.tests)
   const directory = new URL(options.directory)
   if (!directory.pathname.endsWith('/')) {
     directory.pathname += '/'
@@ -259,8 +260,14 @@ export function testFixturesDirectory<Options>(
     }
 
     test(dirname, async (t) => {
-      for (const [name, spec] of Object.entries(options.tests)) {
-        await t.test(name, createTest(dirUrl, name, options.write, options.prettier, spec))
+      if (tests.length === 1) {
+        const [[name, spec]] = tests
+        const run = createTest(dirUrl, name, options.write, options.prettier, spec)
+        await run()
+      } else {
+        for (const [name, spec] of tests) {
+          await t.test(name, createTest(dirUrl, name, options.write, options.prettier, spec))
+        }
       }
     })
   }
