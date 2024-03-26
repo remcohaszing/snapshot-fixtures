@@ -138,6 +138,8 @@ async function getOptions(directory: URL): Promise<unknown> {
   return {}
 }
 
+// This is only covered outside CI.
+/* c8 ignore start */
 /**
  * Write content to a file.
  *
@@ -151,6 +153,8 @@ async function outputFile(url: URL, content: string): Promise<undefined> {
   console.log('Writing', makePrettyPath(url))
   await writeFile(url, content)
 }
+
+/* c8 ignore stop */
 
 /**
  * Create a test for a single test fixture directory.
