@@ -121,9 +121,10 @@ return a string that should match the expected output. A second argument `option
 This may contain the options of the fixture. These options are read from the `options.cjs`,
 `options.js`, `options.json` or `options.mjs` file in the fixture directory.
 
-A test may be an object with the `generate` and optional `input`, `expected` properties. In this
-case `input` determines which input file to read, `generate` serves as the generate function, and
-`expected` refers to the expected output file.
+A test may be an object with the `generate` and optional `input`, `expected`, and `ignore`
+properties. In this case `input` determines which input file to read, `generate` serves as the
+generate function, and `expected` refers to the expected output file. If `ignore` is true, the
+result is written, but assertion failures are ignored.
 
 ## Compatibility
 

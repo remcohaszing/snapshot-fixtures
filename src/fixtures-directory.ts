@@ -31,6 +31,11 @@ type Generate<Options> = (
 
 interface FixtureTest<Options> {
   /**
+   * If true, assertion failures are ignored. The expected fixture is still written.
+   */
+  ignore?: boolean
+
+  /**
    * The fixture input file name to read. If the input has an extension, it’s treated as an exact
    * file name. Otherwise, a file is looked up in the fixture directory whose base name matches the
    * input.
@@ -184,6 +189,7 @@ export function createTest<T>(
     let generate: Generate<T>
     let inputUrl: URL
     let expectedUrl: URL
+    let ignore: boolean | undefined
 
     if (typeof spec === 'function') {
       generate = spec
@@ -193,6 +199,7 @@ export function createTest<T>(
       generate = spec.generate
       inputUrl = await getInputUrl(dir, spec.input)
       expectedUrl = new URL(spec.expected ?? name, dir)
+      ignore = spec.ignore
     }
 
     const fixtureOptions = await getOptions(dir)
@@ -244,7 +251,9 @@ export function createTest<T>(
 
       /* c8 ignore stop */
 
-      throw error
+      if (!ignore) {
+        throw error
+      }
     }
   }
 }
