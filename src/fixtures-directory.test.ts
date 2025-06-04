@@ -54,7 +54,7 @@ describe('testFixturesDirectory', () => {
 
   test('throws assertion error if actual doesn’t match expected', async () => {
     const dir = join(tmpdir(), randomUUID())
-    let file: VFile | undefined
+    let file: undefined | VFile
     await mkdir(dir, { recursive: true })
     await writeFile(join(dir, 'input'), 'in\n')
     await writeFile(join(dir, 'expected'), 'old\n')
@@ -66,7 +66,7 @@ describe('testFixturesDirectory', () => {
 
     await assert.rejects(run(), /\+ new/)
 
-    assert(file instanceof VFile)
+    assert.ok(file instanceof VFile)
     assert.equal(file.value, 'in\n')
     assert.equal(file.path, join(dir, 'input'))
 

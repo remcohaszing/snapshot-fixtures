@@ -103,7 +103,7 @@ export interface AssertEqualOptions {
   /**
    * The file URL which is related to the assertion. Typically this is a file fixture.
    */
-  url?: URL | string
+  url?: string | URL
 }
 
 /**

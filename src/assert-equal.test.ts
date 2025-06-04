@@ -25,7 +25,7 @@ describe('assertEqual', () => {
     assert.throws(
       () => assertEqual('rat', 'cat'),
       (error) => {
-        assert(error instanceof AssertionError)
+        assert.ok(error instanceof AssertionError)
         assert.equal(
           error.message,
           fromLines(
@@ -38,7 +38,7 @@ describe('assertEqual', () => {
         assert.equal(error.actual, 'rat')
         assert.equal(error.expected, 'cat')
         assert.equal(error.operator, '===')
-        assert(error.generatedMessage)
+        assert.ok(error.generatedMessage)
         return true
       }
     )
@@ -48,7 +48,7 @@ describe('assertEqual', () => {
     assert.throws(
       () => assertEqual(fromLines('cat', 'dog', 'fish'), fromLines('cat', 'parrot', 'fish')),
       (error) => {
-        assert(error instanceof AssertionError)
+        assert.ok(error instanceof AssertionError)
         assert.equal(
           error.message,
           fromLines(
@@ -65,7 +65,7 @@ describe('assertEqual', () => {
         assert.equal(error.actual, fromLines('cat', 'dog', 'fish'))
         assert.equal(error.expected, fromLines('cat', 'parrot', 'fish'))
         assert.equal(error.operator, '===')
-        assert(error.generatedMessage)
+        assert.ok(error.generatedMessage)
         return true
       }
     )
@@ -75,7 +75,7 @@ describe('assertEqual', () => {
     assert.throws(
       () => assertEqual('rat', 'cat', import.meta),
       (error) => {
-        assert(error instanceof AssertionError)
+        assert.ok(error instanceof AssertionError)
         assert.equal(
           error.message,
           fromLines(

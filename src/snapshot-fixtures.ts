@@ -1,6 +1,6 @@
 export { assertEqual, type AssertEqualOptions } from './assert-equal.js'
 export {
-  testFixturesDirectory,
   type Test,
+  testFixturesDirectory,
   type TestFixturesDirectoryOptions
 } from './fixtures-directory.js'

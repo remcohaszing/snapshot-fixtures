@@ -27,7 +27,7 @@ import { makePrettyPath } from './path-utils.js'
 type Generate<Options> = (
   file: VFile,
   options: Options
-) => Buffer | PromiseLike<Buffer | VFile | string> | VFile | string
+) => Buffer | PromiseLike<Buffer | string | VFile> | string | VFile
 
 interface FixtureTest<Options> {
   /**
@@ -65,7 +65,7 @@ export interface TestFixturesDirectoryOptions<Options> {
   /**
    * The directory containing fixtures as a URL or URL string.
    */
-  directory: URL | string
+  directory: string | URL
 
   /**
    * If true, format the generated value with Prettier.
@@ -128,12 +128,10 @@ async function getOptions(directory: URL): Promise<unknown> {
   for (const fileName of await readdir(directory)) {
     switch (fileName) {
       case 'options.json':
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return JSON.parse(await readFile(new URL(fileName, directory), 'utf8'))
       case 'options.cjs':
       case 'options.js':
       case 'options.mjs':
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         return (await import(fileURLToPath(new URL(fileName, directory)))).default as unknown
       default:
         break

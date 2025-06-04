@@ -1,1 +1,3 @@
-exports.options = 'cjs'
+module.exports = {
+  options: 'cjs'
+}

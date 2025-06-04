@@ -14,7 +14,7 @@ import chalk from 'chalk'
  * @returns
  *   The formatted path
  */
-export function makePrettyPath(url: URL | string): string {
+export function makePrettyPath(url: string | URL): string {
   let prettyPath = fileURLToPath(url)
   if (prettyPath.endsWith('/')) {
     prettyPath = prettyPath.slice(0, -1)
