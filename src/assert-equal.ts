@@ -128,9 +128,9 @@ export function assertEqual(
     return
   }
 
-  const diff = expected.includes('\n') && actual.includes('\n') ? diffLines : diffChars
-  const changes = diff(expected, actual)
-  const result = changes.map(diff === diffChars ? colorCharChange : colorLineChange).join('')
+  const hasNewlines = expected.includes('\n') && actual.includes('\n')
+  const changes = hasNewlines ? diffLines(expected, actual) : diffChars(expected, actual)
+  const result = changes.map(hasNewlines ? colorLineChange : colorCharChange).join('')
   let message = 'Expected values to be strictly equal:\n'
   if (options?.url) {
     message += `${makePrettyPath(options.url)}\n`
