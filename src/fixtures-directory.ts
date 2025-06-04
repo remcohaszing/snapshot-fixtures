@@ -130,8 +130,11 @@ async function getOptions(directory: URL): Promise<unknown> {
       case 'options.json':
         return JSON.parse(await readFile(new URL(fileName, directory), 'utf8'))
       case 'options.cjs':
+      case 'options.cts':
       case 'options.js':
       case 'options.mjs':
+      case 'options.mts':
+      case 'options.ts':
         return (await import(fileURLToPath(new URL(fileName, directory)))).default as unknown
       default:
         break
