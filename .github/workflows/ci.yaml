@@ -48,7 +48,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: node --test
+        if: ${{ matrix.node-version == 16 }}
       - run: npm test
+        if: ${{ matrix.node-version >= 18 }}
       - uses: codecov/codecov-action@v5
         if: ${{ matrix.node-version == 20 }}
 
