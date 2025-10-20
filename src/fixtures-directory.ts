@@ -1,3 +1,5 @@
+import type { VFile } from 'vfile'
+
 import { AssertionError } from 'node:assert/strict'
 import { readdirSync, statSync } from 'node:fs'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
@@ -7,7 +9,6 @@ import { fileURLToPath } from 'node:url'
 
 import { isCI } from 'ci-info'
 import { read } from 'to-vfile'
-import { type VFile } from 'vfile'
 
 import { assertEqual } from './assert-equal.js'
 import { makePrettyPath } from './path-utils.js'
@@ -268,7 +269,7 @@ export function createTest<T>(
  * of the expected output file.
  *
  * @template Options
- * The type of the options you expect to be defined.
+ *   The type of the options you expect to be defined.
  * @param options
  *   The {@link TestFixturesDirectoryOptions} to pass in.
  */

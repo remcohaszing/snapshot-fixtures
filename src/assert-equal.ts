@@ -1,7 +1,9 @@
+import type { Change } from 'diff'
+
 import { AssertionError } from 'node:assert/strict'
 
 import chalk from 'chalk'
-import { type Change, diffChars, diffLines } from 'diff'
+import { diffChars, diffLines } from 'diff'
 
 import { makePrettyPath } from './path-utils.js'
 
