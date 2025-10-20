@@ -108,7 +108,7 @@ async function getInputUrl(directory: URL, input = 'input'): Promise<URL> {
     return new URL(input, directory)
   }
 
-  for (const fileName of await readdir(directory)) {
+  for (const fileName of fileNames) {
     if (fileName.startsWith(`${input}.`)) {
       return new URL(fileName, directory)
     }
