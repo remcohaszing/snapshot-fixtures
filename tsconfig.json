@@ -3,14 +3,15 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
+    "exactOptionalPropertyTypes": true,
+    "lib": ["es2022"],
     "module": "node16",
-    "noImplicitAny": true,
     "outDir": "dist",
     "rootDir": "src",
     "sourceMap": true,
-    "strict": true,
     "stripInternal": true,
     "target": "es2022",
-    "lib": ["es2022"]
+    "types": ["node"],
+    "verbatimModuleSyntax": true
   }
 }
