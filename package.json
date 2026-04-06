@@ -1,6 +1,6 @@
 {
   "name": "snapshot-fixtures",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Snapshot fixtures for node:test",
   "keywords": [
     "assert",
