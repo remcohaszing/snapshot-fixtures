@@ -1,5 +1,3 @@
-import type { VFile } from 'vfile'
-
 import { AssertionError } from 'node:assert/strict'
 import { readdirSync, statSync } from 'node:fs'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
@@ -8,7 +6,7 @@ import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 import { isCI } from 'ci-info'
-import { read } from 'to-vfile'
+import { VFile } from 'vfile'
 
 import { assertEqual } from './assert-equal.js'
 import { makePrettyPath } from './path-utils.js'
@@ -205,7 +203,8 @@ export function createTest<T>(
     }
 
     const fixtureOptions = await getOptions(dir)
-    const file = await read(inputUrl, 'utf8')
+    const value = await readFile(inputUrl, 'utf8')
+    const file = new VFile({ path: inputUrl, value })
 
     let expected: string | undefined
     try {
